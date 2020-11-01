@@ -42,27 +42,27 @@ def get_most_profitable_crop(df, pincode_csv, crop_profit, pincode, season):
     return crop_name_trimmed[index][1]
 
 
-@app.route('/')
+@app.route('/',methods=['GET'])
 def index():
     return render_template('index1.html')
 
 
-@app.route('/crop_predictor')
+@app.route('/crop_predictor',methods=['GET'])
 def crop_predictor():
     return render_template('crop_predictor.html')
 
 
-@app.route('/weather_forecast')
+@app.route('/weather_forecast',methods=['GET'])
 def weather_forecast():
     return render_template('index.html')
 
 
-@app.route('/news')
+@app.route('/news',methods=['GET'])
 def news():
     return render_template('news.html')
 
 
-@app.route('/about_us')
+@app.route('/about_us',methods=['GET'])
 def about_us():
     return render_template('about_us.html')
 

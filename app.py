@@ -1,6 +1,5 @@
 
 
-
 from flask import Flask, render_template, request
 import os
 import pandas as pd
@@ -26,7 +25,7 @@ def get_most_profitable_crop(df, pincode_csv, crop_profit, pincode, season):
     details2 = details[details['Season'] == season][['Crop', 'Yeild']]
     crop_inDistrict = list(details2['Crop'])
     crop_name_trimmed = []
-    profit = [0]
+    profit = []
     for crop in crop_inDistrict:
         actual_name = crop
         crop = crop.split(sep='/')[0]
@@ -38,11 +37,9 @@ def get_most_profitable_crop(df, pincode_csv, crop_profit, pincode, season):
     for crop in crop_name_trimmed:
         crop_price = list(crop_profit[crop_profit['crop'] == crop[0]]['marketPrice'])[0]
         crop_yeild = list(details2[details2['Crop'] == crop[1]]['Yeild'])[0]
-    if max(profit)==0:
-        return "None"
-    else:
-        index = profit.index(max(profit))
-        return crop_name_trimmed[index-1][1]
+        profit.append(crop_price * crop_yeild)
+    index = profit.index(max(profit))
+    return crop_name_trimmed[index][1]
 
 
 @app.route('/')
@@ -88,7 +85,6 @@ def handle_result():
         elif season == 'Summer':
             season = 'Summer     '
         crop_df = get_crop_data(df, df2, pincode, season, 2014)
-        profitable_crop = "None"
         profitable_crop = get_most_profitable_crop(df, df2, crop_profit,pincode,season)
         dict_crop = crop_df.set_index('Crop')['Yeild'].to_dict()
     return render_template('result.html', result=[dict_crop,profitable_crop])

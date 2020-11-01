@@ -38,7 +38,8 @@ def get_most_profitable_crop(df, pincode_csv, crop_profit, pincode, season):
         crop_price = list(crop_profit[crop_profit['crop'] == crop[0]]['marketPrice'])[0]
         crop_yeild = list(details2[details2['Crop'] == crop[1]]['Yeild'])[0]
         profit.append(crop_price * crop_yeild)
-     if max(profit)==0:
+    index = profit.index(max(profit))
+    if max(profit)==0:
         return "None"
     else:
         return crop_name_trimmed[index][1]

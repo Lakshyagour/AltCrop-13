@@ -45,27 +45,27 @@ def get_most_profitable_crop(df, pincode_csv, crop_profit, pincode, season):
         return crop_name_trimmed[index][1]
 
 
-@app.route('/',methods=['GET'])
+@app.route('/')
 def index():
     return render_template('index1.html')
 
 
-@app.route('/crop_predictor',methods=['GET'])
+@app.route('/crop_predictor')
 def crop_predictor():
     return render_template('crop_predictor.html')
 
 
-@app.route('/weather_forecast',methods=['GET'])
+@app.route('/weather_forecast')
 def weather_forecast():
     return render_template('index.html')
 
 
-@app.route('/news',methods=['GET'])
+@app.route('/news')
 def news():
     return render_template('news.html')
 
 
-@app.route('/about_us',methods=['GET'])
+@app.route('/about_us')
 def about_us():
     return render_template('about_us.html')
 
@@ -90,7 +90,7 @@ def handle_result():
             season = 'Summer     '
         crop_df = get_crop_data(df, df2, pincode, season, 2014)
         profitable_crop = "None"
-        profitable_crop = get_most_profitable_crop(df,df2,crop_profit,pincode,season)
+        profitable_crop = get_most_profitable_crop(df, df2, crop_profit, pincode, season)
         dict_crop = crop_df.set_index('Crop')['Yeild'].to_dict()
     return render_template('result.html', result=[dict_crop,profitable_crop])
 

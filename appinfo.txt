@@ -1,0 +1,2 @@
+functional features :- crop predictor and weather forecast 
+non-functional :- result page information, login/signup page  

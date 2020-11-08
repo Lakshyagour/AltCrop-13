@@ -1,0 +1,4 @@
+clone the repo from github 
+create a folder named AltCrop-13
+add the source code in the folder 
+import the folder in pycharm community version
